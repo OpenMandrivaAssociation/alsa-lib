@@ -121,6 +121,7 @@ perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 # (cg) For sound profile support
 mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
+echo "# This file is left blank to allow alsa to default to dmix" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
 
 %define alt_name soundprofile
@@ -141,6 +142,7 @@ fi
 %dir %{_sysconfdir}/sound/profiles/alsa
 %{_sysconfdir}/sound/profiles/README
 %{_sysconfdir}/sound/profiles/alsa/profile.conf
+%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/

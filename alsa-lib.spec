@@ -119,7 +119,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
 echo "# This file is left blank to allow alsa to default to dmix" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
-ln -s %{_sysconfdir}/sound/profiles/alsa/alsa-default.conf %{buildroot}%{_datadir}/alsa/alsa.conf.d/99-default.conf
+ln -s %{_sysconfdir}/sound/profiles/current/alsa-default.conf %{buildroot}%{_datadir}/alsa/alsa.conf.d/99-default.conf
 
 %define alt_name soundprofile
 %define alt_priority 10

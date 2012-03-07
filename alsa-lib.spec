@@ -108,37 +108,20 @@ This package contains the documentation that describe tha ALSA lib API.
 %apply_patches
 
 %build
-mkdir shared
-cd shared
-CONFIGURE_TOP=..
 %configure2_5x --enable-shared --enable-python
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
 perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 %make
 %make -C doc doc
-cd ..
-mkdir static
-cd static
-%configure2_5x --disable-shared --enable-static --enable-python
-# Force definition of -DPIC so that VERSIONED_SYMBOLS are used
-# FIXME: alsa people should not depend on PIC to determine a DSO build...
-perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
-%make
-cd ..
 
 %install
-%makeinstall_std -C static
-%makeinstall_std -C shared
+%makeinstall_std
 
 # (cg) For sound profile support
 mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
 install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
-
-# cleanup
-rm -f %{buildroot}%{_libdir}/*.*a
-rm -f %{buildroot}%{_libdir}/alsa-lib/smixer/*.*a
 
 %define alt_name soundprofile
 %define alt_priority 10
@@ -173,7 +156,7 @@ fi
 %{_libdir}/libasound.so.%{major}*
 
 %files docs
-%doc shared/doc/doxygen/html/* doc/asoundrc.txt
+%doc doc/doxygen/html/* doc/asoundrc.txt
 
 %files -n %{devname}
 %dir %{_includedir}/alsa/

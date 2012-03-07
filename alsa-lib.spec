@@ -133,8 +133,8 @@ cd ..
 
 # (cg) For sound profile support
 mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
-echo "SOUNDPROFILE=alsa" >%{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
-install -m 644 %{SOURCE1} -D%{buildroot}%{_sysconfdir}/sound/profiles/README
+echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
+install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
 
 # cleanup
 rm -f %{buildroot}%{_libdir}/*.*a

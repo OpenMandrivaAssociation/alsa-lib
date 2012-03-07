@@ -13,9 +13,6 @@ Release:	3
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
 
-# (cg) Mandriva Specific patches
-Patch0500:	0500-Add-hooks-to-auto-enable-and-default-to-pulseaudio-w.patch
-
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Group:		Sound
@@ -105,7 +102,6 @@ This package contains the documentation that describe tha ALSA lib API.
 
 %prep
 %setup -q
-%apply_patches
 
 %build
 %configure2_5x --enable-shared --enable-python
@@ -123,6 +119,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
 echo "# This file is left blank to allow alsa to default to dmix" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
+ln -s %{_sysconfdir}/sound/profiles/alsa/alsa-default.conf %{buildroot}%{_datadir}/alsa/alsa.conf.d/99-default.conf
 
 %define alt_name soundprofile
 %define alt_priority 10

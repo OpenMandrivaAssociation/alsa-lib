@@ -22,8 +22,6 @@ Group:		Sound
 BuildRequires:	doxygen 
 BuildRequires:	python-devel
 
-Requires:	%{libname} = %{EVRD}
-
 Requires(post):	update-alternatives
 Requires(postun):update-alternatives
 
@@ -43,7 +41,7 @@ Using the ALSA api requires to use the ALSA library.
 %package -n	%{libname}
 Summary:	Advanced Linux Sound Architecture (ALSA) library
 Group:		Sound
-Requires:	%{name}
+Requires:	%{name} = %{EVRD}
 Suggests:	%mklibname alsa-plugins
 
 Provides:	%{oldlib} = 2:%{version}-%{release}

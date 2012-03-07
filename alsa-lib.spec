@@ -2,14 +2,12 @@
 %define major 2
 %define lib_name %mklibname alsa %major
 %define develname %mklibname -d alsa
-#define beta 0
-%define fname alsa-lib-%{version}%{?beta}
 
 Summary:	Advanced Linux Sound Architecture (ALSA) library
-Name:		libalsa2
+Name:		alsa-lib
 Version:	1.0.25
 Release:	%{?beta:0.%{beta}.}2
-Source0:	ftp://ftp.alsa-project.org/pub/lib/%{fname}.tar.bz2
+Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
 
 # (cg) Mandriva Specific patches
@@ -38,7 +36,6 @@ To use the features of alsa, one can either use:
 
 Using the ALSA api requires to use the ALSA library.
 
-%if "%{_lib}" != "lib"
 %package -n %{lib_name}
 Summary:	Advanced Linux Sound Architecture (ALSA) library
 Group:		Sound
@@ -55,7 +52,6 @@ To use the features of alsa, one can either use:
 - the new ALSA api that provides many enhanced features.
 
 Using the ALSA api requires to use the ALSA library.
-%endif
 
 %define alt_name soundprofile
 %define alt_priority 10
@@ -131,7 +127,7 @@ This package contains the documentation that describe tha ALSA lib API.
 
 
 %prep
-%setup -q -n %fname
+%setup -q
 %apply_patches
 
 %build

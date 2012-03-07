@@ -13,7 +13,7 @@ Source1:	README.soundprofiles
 # (cg) Mandriva Specific patches
 Patch0500:	0500-Add-hooks-to-auto-enable-and-default-to-pulseaudio-w.patch
 
-License:	GPL
+License:	LGPLv2+
 Epoch:		2
 Url:		http://www.alsa-project.org/
 Group:		Sound

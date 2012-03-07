@@ -17,11 +17,7 @@ License:	GPL
 Epoch:		2
 Url:		http://www.alsa-project.org/
 Group:		Sound
-Provides:	alsa-lib, %lib_name_orig = %version
-Obsoletes:	alsa-lib, %lib_name_orig
 Suggests: %mklibname alsa-plugins
-#Obsoletes: libalsa1
-#Provides: libalsa1
 BuildRequires:	doxygen 
 BuildRequires:	python-devel
 Requires:	%{lib_name_orig}-data
@@ -39,8 +35,6 @@ Using the ALSA api requires to use the ALSA library.
 %package -n %{lib_name}
 Summary:	Advanced Linux Sound Architecture (ALSA) library
 Group:		Sound
-Provides:	alsa-lib, %lib_name_orig = %version
-Obsoletes:	alsa-lib, %lib_name_orig
 Requires:	%{lib_name_orig}-data
 
 %description -n %{lib_name}
@@ -87,9 +81,7 @@ fi
 Summary:    Development files for Advanced Linux Sound Architecture (ALSA)
 Group:      Development/C
 Requires:   %lib_name >= %epoch:%version-%release
-Provides:   libalsa1-devel alsa-lib-devel, %lib_name_orig-devel = %version-%release
-Obsoletes:  libalsa1-devel alsa-lib-devel
-Obsoletes:  %{mklibname alsa2 -d}
+Provides:   %lib_name_orig-devel = %version-%release
 
 %description -n %{develname}
 Advanced Linux Sound Architecture (ALSA) is a modularized architecture which

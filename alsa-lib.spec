@@ -136,6 +136,7 @@ if [ ! -f %{_sysconfdir}/sound/profiles/alsa/profile.conf ]; then
 fi
 
 %files
+%{_bindir}/aserver
 %dir %{_sysconfdir}/sound/profiles
 %dir %{_sysconfdir}/sound/profiles/alsa
 %{_sysconfdir}/sound/profiles/README
@@ -162,7 +163,6 @@ fi
 %{_datadir}/aclocal/alsa.m4
 %{_libdir}/libasound.so
 %{_libdir}/pkgconfig/alsa.pc
-%{_bindir}/*
 
 %files docs
 %doc doc/doxygen/html/* doc/asoundrc.txt

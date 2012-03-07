@@ -170,11 +170,10 @@ fi
 %{_libdir}/alsa-lib/smixer/*
 
 %files -n %{libname}
-%doc COPYING
 %{_libdir}/libasound.so.%{major}*
 
 %files docs
-%doc COPYING shared/doc/doxygen/html/* doc/asoundrc.txt
+%doc shared/doc/doxygen/html/* doc/asoundrc.txt
 
 %files -n %{devname}
 %dir %{_includedir}/alsa/

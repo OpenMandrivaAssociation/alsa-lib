@@ -45,7 +45,6 @@ Suggests:	%mklibname alsa-plugins
 Provides:	%{oldlib} = 2:%{version}-%{release}
 Obsoletes:	%{oldlib} < 2:1.0.25-3
 
-
 %description -n	%{libname}
 Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
 supports quite a large range of ISA and PCI cards.

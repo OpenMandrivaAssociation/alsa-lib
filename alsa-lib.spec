@@ -9,7 +9,8 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.25
-Release:	3
+Release:	4
+Epoch:		2
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
 
@@ -60,8 +61,8 @@ Summary:	Development files for Advanced Linux Sound Architecture (ALSA)
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
 
-Provides:	%{oldlib} = 2:%{version}-%{release}
-Obsoletes:	%{oldlib} < 2:1.0.25-3
+Provides:	%{olddev} = 2:%{version}-%{release}
+Obsoletes:	%{olddev} < 2:1.0.25-3
 
 %description -n	%{devname}
 Advanced Linux Sound Architecture (ALSA) is a modularized architecture which

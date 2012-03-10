@@ -98,7 +98,7 @@ The Library offers 100% of the functionally of the kernel API, but add next
 major improvements in usability, making the application code simpler and better
 looking.
 
-This package contains the documentation that describe tha ALSA lib API.
+This package contains the documentation that describe the ALSA lib API.
 
 %prep
 %setup -q

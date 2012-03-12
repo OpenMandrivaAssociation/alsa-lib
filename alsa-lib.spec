@@ -9,20 +9,17 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.25
-Release:	6
+Release:	7
 Epoch:		2
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
-
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Group:		Sound
 BuildRequires:	doxygen 
 BuildRequires:	python-devel
-
 Requires(post):	update-alternatives
 Requires(postun):update-alternatives
-
 Provides:	libalsa-data = 2:%{version}-%{release}
 Obsoletes:	libalsa-data < 2:1.0.25-3
 
@@ -41,7 +38,6 @@ Summary:	Advanced Linux Sound Architecture (ALSA) library
 Group:		Sound
 Requires:	%{name} = %{EVRD}
 Suggests:	%mklibname alsa-plugins
-
 Provides:	%{oldlib} = 2:%{version}-%{release}
 Obsoletes:	%{oldlib} < 2:1.0.25-3
 
@@ -59,9 +55,10 @@ This package contains config files by ALSA applications.
 Summary:	Development files for Advanced Linux Sound Architecture (ALSA)
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
-
 Provides:	%{olddev} = 2:%{version}-%{release}
 Obsoletes:	%{olddev} < 2:1.0.25-3
+Provides:	libalsa-devel = 2:%{version}-%{release}
+Obsoletes:	libalsa-devel < 2:1.0.25-3
 
 %description -n	%{devname}
 Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
@@ -78,7 +75,6 @@ that made use of ALSA.
 Summary:	Documentation for Advanced Linux Sound Architecture (ALSA)
 Group:		Books/Howtos
 Requires:	%{libname} = %{EVRD}
-
 Provides:	libalsa2-docs = 2:%{version}-%{release}
 Obsoletes:	libalsa2-docs < 2:1.0.25-3
 

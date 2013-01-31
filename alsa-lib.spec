@@ -1,15 +1,15 @@
-%define	major	2
+%define major 2
 
-%define	oldlib	%mklibname alsa %{major}
-%define	olddev	%mklibname -d alsa2
+%define oldlib %mklibname alsa %{major}
+%define olddev %mklibname -d alsa2
 
-%define	libname	%mklibname asound %{major}
-%define	devname	%mklibname -d asound
+%define libname %mklibname asound %{major}
+%define devname %mklibname -d asound
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.26
-Release:	2
+Release:	3
 Epoch:		2
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
@@ -19,7 +19,7 @@ Group:		Sound
 BuildRequires:	doxygen
 BuildRequires:	python-devel
 Requires(post):	update-alternatives
-Requires(postun):update-alternatives
+Requires(postun):	update-alternatives
 Provides:	libalsa-data = 2:%{version}-%{release}
 Obsoletes:	libalsa-data < 2:1.0.26
 Conflicts:	%{olddev} < 2:1.0.26
@@ -72,7 +72,7 @@ To use the features of alsa, one can either use:
 This package contains files needed in order to develop an application
 that made use of ALSA.
 
-%package	docs
+%package docs
 Summary:	Documentation for Advanced Linux Sound Architecture (ALSA)
 Group:		Books/Howtos
 Requires:	%{libname} = %{EVRD}
@@ -101,7 +101,10 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
-%configure2_5x --enable-shared --enable-python
+%configure2_5x \
+		--enable-shared \
+        --enable-python
+
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
 perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool

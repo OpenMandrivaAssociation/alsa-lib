@@ -101,6 +101,9 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
+#fix build with new automake
+sed -i -e 's,AM_CONFIG_HEADER,AC_CONFIG_HEADERS,g' configure.*
+autoreconf -fi
 %configure2_5x \
 		--enable-shared \
         --enable-python

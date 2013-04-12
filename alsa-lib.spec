@@ -9,10 +9,11 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.26
-Release:	3
+Release:	4
 Epoch:		2
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
+Patch1:		alsa-lib-1.0.26-header.patch
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Group:		Sound
@@ -99,6 +100,7 @@ This package contains the documentation that describe the ALSA lib API.
 
 %prep
 %setup -q
+%patch1 -p1
 
 %build
 #fix build with new automake

@@ -1,4 +1,2 @@
-removed_sources:
-  alsa-lib-1.0.26.tar.bz2: 3928ec629d66892394d1f87d8b2f87500b973e59
 sources:
   alsa-lib-1.0.27.tar.bz2: a110aa9230fc93c4bef776d255df2fac9ffd9e7a

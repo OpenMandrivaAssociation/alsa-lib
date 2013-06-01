@@ -9,7 +9,7 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.27
-Release:	2
+Release:	3
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
@@ -112,9 +112,6 @@ This package contains the documentation that describe the ALSA lib API.
 %patch3 -p1
 
 %build
-#fix build with new automake
-sed -i -e 's,AM_CONFIG_HEADER,AC_CONFIG_HEADERS,g' configure.*
-autoreconf -fi
 %configure2_5x \
 		--enable-shared \
         --enable-python

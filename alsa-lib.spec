@@ -8,21 +8,14 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.0.27
-Release:	3
+Version:	1.0.27.1
+Release:	1
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
-# Make sure programs build with C90
-# See https://bugs.gentoo.org/show_bug.cgi?id=468402#c3
-Patch0:		alsa-lib-1.0.27-inline.patch
-Patch1:		alsa-lib-1.0.27-inline-2.patch
-# Upstream patches for support DSD
-Patch2:		alsa-lib-1.0.27-kernel.patch
-Patch3:		alsa-lib-1.0.27-pcm.patch
 BuildRequires:	doxygen
 BuildRequires:	python-devel
 Requires(post):	update-alternatives
@@ -106,10 +99,6 @@ This package contains the documentation that describe the ALSA lib API.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 %configure2_5x \
@@ -124,6 +113,11 @@ perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 
 %install
 %makeinstall_std
+
+%ifnarch arm armv7hf armv7hl
+# No need to keep ARM-only hardware support...
+rm -rf %buildroot%_datadir/ucm/PandaBoard*
+%endif
 
 # (cg) For sound profile support
 mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
@@ -154,8 +148,10 @@ fi
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/
+%dir %{_datadir}/alsa/ucm/
 %{_datadir}/alsa/cards/*
 %{_datadir}/alsa/pcm/*
+%{_datadir}/alsa/ucm/*
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/alsa.conf.d
 %{_datadir}/alsa/smixer.conf

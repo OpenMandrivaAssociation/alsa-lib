@@ -9,7 +9,7 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.28
-Release:	1
+Release:	2
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
@@ -101,9 +101,9 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
-%configure2_5x \
-		--enable-shared \
-        --enable-python
+%configure \
+	--enable-shared \
+	--enable-python
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
@@ -173,4 +173,3 @@ fi
 
 %files docs
 %doc doc/doxygen/html/* doc/asoundrc.txt
-

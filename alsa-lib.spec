@@ -17,7 +17,7 @@ Url:		http://www.alsa-project.org/
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
 BuildRequires:	doxygen
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig(python2)
 Requires(post):	update-alternatives
 Requires(postun):	update-alternatives
 Provides:	libalsa-data = 2:%{version}-%{release}

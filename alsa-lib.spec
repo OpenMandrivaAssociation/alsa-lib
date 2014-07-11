@@ -101,6 +101,7 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
+export CC=%{__cc}
 %configure \
 	--enable-shared \
 	--enable-python

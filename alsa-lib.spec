@@ -121,11 +121,6 @@ perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 # (proyvind): configuration for wandboard
 install -m644 %{SOURCE10} %{SOURCE11} %{SOURCE12} %{buildroot}%{_datadir}/alsa/cards
 
-%ifnarch arm armv7hf armv7hl
-# No need to keep ARM-only hardware support...
-rm -rf %buildroot%_datadir/ucm/PandaBoard*
-%endif
-
 # (cg) For sound profile support
 mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf

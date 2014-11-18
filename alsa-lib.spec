@@ -9,13 +9,16 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.0.28
-Release:	3
+Release:	4
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source1:	README.soundprofiles
+Source10:	imx6-wandboard-.conf
+Source11:	imx-hdmi-soc.conf
+Source12:	imx-spdif.conf
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python2)
 Requires(post):	update-alternatives
@@ -114,6 +117,9 @@ perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 
 %install
 %makeinstall_std
+
+# (proyvind): configuration for wandboard
+install -m644 %{SOURCE10} %{SOURCE11} %{SOURCE12} %{buildroot}%{_datadir}/alsa/cards
 
 %ifnarch arm armv7hf armv7hl
 # No need to keep ARM-only hardware support...

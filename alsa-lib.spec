@@ -121,7 +121,7 @@ that made use of ALSA.
 
 %package docs
 Summary:	Documentation for Advanced Linux Sound Architecture (ALSA)
-Group:		Documentation
+Group:		Sound
 Requires:	%{libname} = %{EVRD}
 Provides:	libalsa2-docs = 2:%{version}-%{release}
 Obsoletes:	libalsa2-docs < 2:1.0.26

@@ -104,7 +104,11 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
-export CC=%{__cc}
+# (tpg) build with GCC due to bug
+# https://llvm.org/bugs/show_bug.cgi?id=24023
+export CC=gcc
+export CXX=g++
+
 %configure \
 	--enable-shared \
 	--enable-python

@@ -104,7 +104,7 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
-%setup_compile_flags
+%define _disable_lto 1
 export PYTHON=%{__python2}
 # (tpg) build with GCC due to bug
 # https://llvm.org/bugs/show_bug.cgi?id=24023

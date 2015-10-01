@@ -104,6 +104,8 @@ This package contains the documentation that describe the ALSA lib API.
 %setup -q
 
 %build
+%setup_compile_flags
+export PYTHON=%{__python2}
 # (tpg) build with GCC due to bug
 # https://llvm.org/bugs/show_bug.cgi?id=24023
 export CC=gcc
@@ -178,4 +180,4 @@ fi
 %{_libdir}/pkgconfig/alsa.pc
 
 %files docs
-%doc doc/doxygen/html/* doc/asoundrc.txt
+%doc COPYING doc/doxygen/html/* doc/asoundrc.txt

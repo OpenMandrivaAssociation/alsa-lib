@@ -120,11 +120,13 @@ autoreconf -fiv
 
 %configure \
 	--enable-shared \
-	--enable-python
+	--enable-python \
+	--with-pythonlibs=/usr/lib64/python2.7 \
+	--with-pythonincludes=/usr/include/python2.7
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
-perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
+#perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 %make
 %make -C doc doc
 

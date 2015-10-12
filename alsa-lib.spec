@@ -125,8 +125,13 @@ autoreconf -fiv
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
-#perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
+perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 %make
+
+# ensure we enable html doc
+sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
+
+
 %make -C doc doc
 
 %install

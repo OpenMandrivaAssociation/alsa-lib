@@ -111,8 +111,6 @@ export PYTHON=%{__python2}
 # https://llvm.org/bugs/show_bug.cgi?id=24023
 #export CC=gcc
 #export CXX=g++
-# that hack is workaround
-sed -i 's!@@!@@@!g' include/alsa-symbols.h
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
@@ -122,8 +120,8 @@ autoreconf -fiv
 %configure \
 	--enable-shared \
 	--enable-python \
-	--with-pythonlibs=%{_libdir}/python%{py2_ver} \
-	--with-pythonincludes=%{_includedir}/python%{py2_ver}
+	--with-pythonlibs="`python2-config --libs`" \
+	--with-pythonincludes="`python2-config --includes`"
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...

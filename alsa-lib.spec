@@ -5,6 +5,7 @@
 
 %define libname %mklibname asound %{major}
 %define devname %mklibname -d asound
+%define _disable_ld_no_undefined 1
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
@@ -121,8 +122,8 @@ autoreconf -fiv
 %configure \
 	--enable-shared \
 	--enable-python \
-	--with-pythonlibs=/usr/lib64/python2.7 \
-	--with-pythonincludes=/usr/include/python2.7
+	--with-pythonlibs=%{_libdir}/python%{py2_ver} \
+	--with-pythonincludes=%{_includedir}/python%{py2_ver}
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...

@@ -177,6 +177,7 @@ fi
 %{_datadir}/alsa/alsa.conf.d
 %{_datadir}/alsa/smixer.conf
 %{_datadir}/alsa/sndo-mixer.alisp
+%{_datadir}/alsa/topology/broadwell/broadwell.conf
 %dir %{_libdir}/alsa-lib
 %dir %{_libdir}/alsa-lib/smixer/
 %{_libdir}/alsa-lib/smixer/*

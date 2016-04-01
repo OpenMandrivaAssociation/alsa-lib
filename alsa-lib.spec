@@ -107,15 +107,17 @@ This package contains the documentation that describe the ALSA lib API.
 %build
 %define _disable_lto 1
 export PYTHON=%{__python2}
-# (tpg) build with GCC due to bug
-# https://llvm.org/bugs/show_bug.cgi?id=24023
-#export CC=gcc
-#export CXX=g++
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 libtoolize --copy --force
 autoreconf -fiv
+
+%ifarch %{ix86}
+# Compile time crash with clang 3.3.3.
+export CC=gcc
+export CXX=g++
+%endif
 
 %configure \
 	--enable-shared \

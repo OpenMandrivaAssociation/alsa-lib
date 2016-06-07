@@ -2,7 +2,7 @@ Sound Profiles in OpenMandriva Lx
 =================================
 
 In order to easily switch between using pure ALSA and using the (default)
-PulseAudio Sound Server, Mandriva uses a simple alternatives based
+PulseAudio Sound Server, OpenMandriva uses a simple alternatives based
 approach.
 
 If you wish to select a sound system you can simply run draksound as

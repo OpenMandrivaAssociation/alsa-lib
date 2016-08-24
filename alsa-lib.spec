@@ -167,21 +167,20 @@ fi
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/
 %dir %{_datadir}/alsa/ucm/
-%dir %{_datadir}/alsa/topology
-%dir %{_datadir}/alsa/topology/sklrt286
 %{_datadir}/alsa/cards/*
 %{_datadir}/alsa/pcm/*
 %{_datadir}/alsa/ucm/*
-%{_datadir}/alsa/topology/sklrt286/*.bin
-%{_datadir}/alsa/topology/sklrt286/*.conf
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/alsa.conf.d
 %{_datadir}/alsa/smixer.conf
 %{_datadir}/alsa/sndo-mixer.alisp
 %dir %{_datadir}/alsa/topology
 %dir %{_datadir}/alsa/topology/broadwell
+%dir %{_datadir}/alsa/topology/sklrt286
 %{_datadir}/alsa/topology/broadwell/broadwell.conf
-%dir %{_libdir}/alsa-lib
+%{_datadir}/alsa/topology/sklrt286/*.bin
+%{_datadir}/alsa/topology/sklrt286/*.conf
+%dir %{_libdir}/alsa-lib/
 %dir %{_libdir}/alsa-lib/smixer/
 %{_libdir}/alsa-lib/smixer/*
 

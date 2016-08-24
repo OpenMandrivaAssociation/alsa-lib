@@ -9,7 +9,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -113,14 +113,9 @@ find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 libtoolize --copy --force
 autoreconf -fiv
 
-%ifarch %{ix86}
-# Compile time crash with clang 3.3.3.
-export CC=gcc
-export CXX=g++
-%endif
-
 %configure \
 	--enable-shared \
+	--enable-symbolic-functions \
 	--enable-python \
 	--with-pythonlibs="`python2-config --libs`" \
 	--with-pythonincludes="`python2-config --includes`"

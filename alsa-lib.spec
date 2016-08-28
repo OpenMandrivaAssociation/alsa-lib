@@ -106,7 +106,7 @@ This package contains the documentation that describe the ALSA lib API.
 
 %build
 %define _disable_lto 1
-%if %mdvver = 3000000
+%if %{mdvver} <= 3000000
 %ifarch %{ix86}
 # Compile time crash with clang 3.8.
 export CC=gcc

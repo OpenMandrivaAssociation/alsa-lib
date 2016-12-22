@@ -9,7 +9,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.2
+Version:	1.1.3
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -184,9 +184,10 @@ fi
 %{_datadir}/alsa/sndo-mixer.alisp
 %dir %{_datadir}/alsa/topology
 %dir %{_datadir}/alsa/topology/broadwell
+%dir %{_datadir}/alsa/topology/bxtrt298
 %dir %{_datadir}/alsa/topology/sklrt286
 %{_datadir}/alsa/topology/broadwell/broadwell.conf
-%{_datadir}/alsa/topology/sklrt286/*.bin
+%{_datadir}/alsa/topology/bxtrt298/*.conf
 %{_datadir}/alsa/topology/sklrt286/*.conf
 %dir %{_libdir}/alsa-lib/
 %dir %{_libdir}/alsa-lib/smixer/

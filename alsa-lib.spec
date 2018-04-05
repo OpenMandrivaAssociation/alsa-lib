@@ -9,7 +9,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.5
+Version:	1.1.6
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -21,7 +21,7 @@ Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
 BuildRequires:	doxygen
-BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(python)
 Requires(post):	update-alternatives
 Requires(postun):	update-alternatives
 Provides:	libalsa-data = 2:%{version}-%{release}
@@ -114,19 +114,43 @@ export CXX=g++
 %endif
 %endif
 
-export PYTHON=%{__python2}
+export PYTHON=%{__python}
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 libtoolize --copy --force
 autoreconf -fiv
 
+if [ -e src/conf/smixer.conf ]; then
+	echo "smixer.conf is in tree, remove workaround"
+	exit 1
+else
+	cat >src/conf/smixer.conf <<'EOF'
+_full smixer-python.so
+usb {
+	searchl "USB"
+	lib smixer-usb.so
+}
+ac97 {
+	searchl "AC97a:"
+	lib smixer-ac97.so
+}
+hda {
+	searchl "HDA:"
+	lib smixer-hda.so
+}
+EOF
+fi
+
 %configure \
 	--enable-shared \
 	--enable-symbolic-functions \
 	--enable-python \
-	--with-pythonlibs="`python2-config --libs`" \
-	--with-pythonincludes="`python2-config --includes`"
+	--enable-mixer \
+	--enable-mixer-modules \
+	--enable-mixer-pymods \
+	--with-pythonlibs="`python-config --libs`" \
+	--with-pythonincludes="`python-config --includes`"
 
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
@@ -181,7 +205,6 @@ fi
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/alsa.conf.d
 %{_datadir}/alsa/smixer.conf
-%{_datadir}/alsa/sndo-mixer.alisp
 %dir %{_datadir}/alsa/topology
 %dir %{_datadir}/alsa/topology/broadwell
 %dir %{_datadir}/alsa/topology/bxtrt298

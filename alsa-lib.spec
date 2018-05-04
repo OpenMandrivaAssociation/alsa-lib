@@ -22,8 +22,8 @@ Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
-Requires(post):	update-alternatives
-Requires(postun):	update-alternatives
+Requires(post):	chkconfig
+Requires(postun):	chkconfig
 Provides:	libalsa-data = 2:%{version}-%{release}
 Obsoletes:	libalsa-data < 2:1.0.26
 Conflicts:	%{olddev} < 2:1.0.26

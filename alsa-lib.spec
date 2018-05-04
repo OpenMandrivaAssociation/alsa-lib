@@ -21,7 +21,7 @@ Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
 BuildRequires:	doxygen
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python2)
 Requires(post):	chkconfig
 Requires(postun):	chkconfig
 Provides:	libalsa-data = 2:%{version}-%{release}
@@ -114,7 +114,7 @@ export CXX=g++
 %endif
 %endif
 
-export PYTHON=%{__python}
+export PYTHON=%{__python2}
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +

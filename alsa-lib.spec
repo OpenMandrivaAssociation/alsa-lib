@@ -197,6 +197,7 @@ fi
 %dir %{_sysconfdir}/sound/profiles/alsa
 %{_sysconfdir}/sound/profiles/README
 %{_sysconfdir}/sound/profiles/alsa/profile.conf
+%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/

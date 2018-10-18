@@ -9,7 +9,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.6
+Version:	1.1.7
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -103,6 +103,7 @@ This package contains the documentation that describe the ALSA lib API.
 
 %prep
 %setup -q
+find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 
 %build
 %define _disable_lto 1
@@ -145,6 +146,9 @@ fi
 %configure \
 	--enable-shared \
 	--enable-symbolic-functions \
+	--enable-aload \
+	--enable-rawmidi \
+	--enable-seq \
 	--enable-python \
 	--enable-mixer \
 	--enable-mixer-modules \
@@ -174,7 +178,6 @@ mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
 echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
 echo "# This file is left blank to allow alsa to default to dmix" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
-ln -s %{_sysconfdir}/sound/profiles/current/alsa-default.conf %{buildroot}%{_datadir}/alsa/alsa.conf.d/99-default.conf
 
 %define alt_name soundprofile
 %define alt_priority 10
@@ -194,7 +197,6 @@ fi
 %dir %{_sysconfdir}/sound/profiles/alsa
 %{_sysconfdir}/sound/profiles/README
 %{_sysconfdir}/sound/profiles/alsa/profile.conf
-%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/

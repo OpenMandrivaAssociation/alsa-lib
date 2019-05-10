@@ -9,7 +9,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.8
+Version:	1.1.9
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -224,6 +224,7 @@ fi
 %files -n %{devname}
 %dir %{_includedir}/alsa/
 %{_includedir}/alsa/*
+%{_includedir}/asoundlib.h
 %{_includedir}/sys/asoundlib.h
 %{_datadir}/aclocal/alsa.m4
 %{_libdir}/libasound.so

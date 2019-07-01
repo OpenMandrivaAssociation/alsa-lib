@@ -102,7 +102,7 @@ looking.
 This package contains the documentation that describe the ALSA lib API.
 
 %prep
-%setup -q
+%autosetup -p1
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 
 %build
@@ -159,7 +159,7 @@ fi
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
 perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
-%make
+%make_build
 
 # ensure we enable html doc
 sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
@@ -168,7 +168,7 @@ sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in do
 %make -C doc doc
 
 %install
-%makeinstall_std
+%make_install
 
 # (proyvind): configuration for wandboard
 install -m644 %{SOURCE10} %{SOURCE11} %{SOURCE12} %{buildroot}%{_datadir}/alsa/cards

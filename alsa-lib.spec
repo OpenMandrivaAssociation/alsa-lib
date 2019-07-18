@@ -1,11 +1,11 @@
 %define major 2
-
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2
-
 %define libname %mklibname asound %{major}
 %define devname %mklibname -d asound
-%define _disable_ld_no_undefined 1
+
+%global optflags %{optflags} -flto-partition=none
+%global ldflags %{ldflags} -flto-partition=none
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
@@ -106,7 +106,6 @@ This package contains the documentation that describe the ALSA lib API.
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 
 %build
-%define _disable_lto 1
 %if %{mdvver} <= 3000000
 %ifarch %{ix86}
 # Compile time crash with clang 3.8.

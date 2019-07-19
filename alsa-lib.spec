@@ -4,9 +4,6 @@
 %define libname %mklibname asound %{major}
 %define devname %mklibname -d asound
 
-%global optflags %{optflags} -flto-partition=none
-%global ldflags %{ldflags} -flto-partition=none
-
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.1.9

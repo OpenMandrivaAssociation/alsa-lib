@@ -2,12 +2,13 @@
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2
 %define libname %mklibname asound %{major}
+%define libtopology %mklibname topology %{major}
 %define devname %mklibname -d asound
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.1.9
-Release:	2
+Version:	1.2.1
+Release:	1
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
@@ -53,10 +54,26 @@ To use the features of alsa, one can either use:
 
 This package contains config files by ALSA applications.
 
+%package -n	%{libtopology}
+Summary:	Advanced Linux Sound Architecture (ALSA) library
+Group:		Sound
+Requires:	%{libname} = %{EVRD}
+
+%description -n	%{libtopology}
+Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
+supports quite a large range of ISA and PCI cards.
+It's fully compatible with old OSS drivers (either OSS/Lite, OSS/commercial).
+To use the features of alsa, one can either use:
+- the old OSS api
+- the new ALSA api that provides many enhanced features.
+
+This package contains config files by ALSA applications.
+
 %package -n	%{devname}
 Summary:	Development files for Advanced Linux Sound Architecture (ALSA)
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
+Requires:	%{libtopology} = %{EVRD}
 Provides:	%{olddev} = 2:%{version}-%{release}
 Obsoletes:	%{olddev} < 2:1.0.26
 Provides:	libalsa-devel = 2:%{version}-%{release}
@@ -103,14 +120,6 @@ This package contains the documentation that describe the ALSA lib API.
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 
 %build
-%if %{mdvver} <= 3000000
-%ifarch %{ix86}
-# Compile time crash with clang 3.8.
-export CC=gcc
-export CXX=g++
-%endif
-%endif
-
 export PYTHON=%{__python}
 
 #repect cflags
@@ -197,25 +206,19 @@ fi
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/pcm/
-%dir %{_datadir}/alsa/ucm/
 %{_datadir}/alsa/cards/*
 %{_datadir}/alsa/pcm/*
-%{_datadir}/alsa/ucm/*
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/smixer.conf
-%dir %{_datadir}/alsa/topology
-%dir %{_datadir}/alsa/topology/broadwell
-%dir %{_datadir}/alsa/topology/bxtrt298
-%dir %{_datadir}/alsa/topology/sklrt286
-%{_datadir}/alsa/topology/broadwell/broadwell.conf
-%{_datadir}/alsa/topology/bxtrt298/*.conf
-%{_datadir}/alsa/topology/sklrt286/*.conf
 %dir %{_libdir}/alsa-lib/
 %dir %{_libdir}/alsa-lib/smixer/
 %{_libdir}/alsa-lib/smixer/*
 
 %files -n %{libname}
 %{_libdir}/libasound.so.%{major}*
+
+%files -n %{libtopology}
+%{_libdir}/libatopology.so.%{major}*
 
 %files -n %{devname}
 %dir %{_includedir}/alsa/
@@ -224,6 +227,8 @@ fi
 %{_includedir}/sys/asoundlib.h
 %{_datadir}/aclocal/alsa.m4
 %{_libdir}/libasound.so
+%{_libdir}/libatopology.so
+%{_libdir}/pkgconfig/alsa-topology.pc
 %{_libdir}/pkgconfig/alsa.pc
 
 %files docs

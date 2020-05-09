@@ -305,7 +305,7 @@ fi
 %files -n %{libtopology}
 %{_libdir}/libatopology.so.%{major}*
 
-%if "%{libname}" != "%{lib32name}"
+%ifarch %{x86_64}
 %files -n %{lib32name}
 %{_prefix}/lib/libasound.so.%{major}*
 

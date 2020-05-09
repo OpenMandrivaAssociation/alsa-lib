@@ -1,14 +1,19 @@
+# 32-bit devel files are needed for wine
+
 %define major 2
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2
 %define libname %mklibname asound %{major}
 %define libtopology %mklibname topology %{major}
 %define devname %mklibname -d asound
+%define lib32name libasound%{major}
+%define lib32topology libtopology%{major}
+%define dev32name libasound-devel
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.2.2
-Release:	1
+Release:	2
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
@@ -90,6 +95,58 @@ To use the features of alsa, one can either use:
 This package contains files needed in order to develop an application
 that made use of ALSA.
 
+%if "%{libname}" != "%{lib32name}"
+%package -n	%{lib32name}
+Summary:	Advanced Linux Sound Architecture (ALSA) library (32-bit)
+Group:		Sound
+Requires:	%{name} = %{EVRD}
+Suggests:	libalsa-plugins
+
+%description -n	%{lib32name}
+Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
+supports quite a large range of ISA and PCI cards.
+It's fully compatible with old OSS drivers (either OSS/Lite, OSS/commercial).
+To use the features of alsa, one can either use:
+- the old OSS api
+- the new ALSA api that provides many enhanced features.
+
+This package contains config files by ALSA applications.
+
+%package -n	%{lib32topology}
+Summary:	Advanced Linux Sound Architecture (ALSA) library (32-bit)
+Group:		Sound
+Requires:	%{lib32name} = %{EVRD}
+
+%description -n	%{lib32topology}
+Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
+supports quite a large range of ISA and PCI cards.
+It's fully compatible with old OSS drivers (either OSS/Lite, OSS/commercial).
+To use the features of alsa, one can either use:
+- the old OSS api
+- the new ALSA api that provides many enhanced features.
+
+This package contains config files by ALSA applications.
+
+%package -n	%{dev32name}
+Summary:	Development files for Advanced Linux Sound Architecture (ALSA) (32-bit)
+Group:		Development/C
+Requires:	%{lib32name} = %{EVRD}
+Requires:	%{lib32topology} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+
+%description -n	%{dev32name}
+Advanced Linux Sound Architecture (ALSA) is a modularized architecture which
+supports quite a large range of ISA and PCI cards.
+It's fully compatible with old OSS drivers (either OSS/Lite, OSS/commercial).
+To use the features of alsa, one can either use:
+- the old OSS api
+- the new ALSA api that provides many enhanced features.
+
+This package contains files needed in order to develop an application
+that made use of ALSA.
+
+%endif
+
 %package docs
 Summary:	Documentation for Advanced Linux Sound Architecture (ALSA)
 Group:		Books/Howtos
@@ -119,8 +176,12 @@ This package contains the documentation that describe the ALSA lib API.
 %autosetup -p1
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 
+# ensure we enable html doc
+sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
+
 %build
 export PYTHON=%{__python}
+export CONFIGURE_TOP="`pwd`"
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
@@ -148,6 +209,26 @@ hda {
 EOF
 fi
 
+%ifarch %{x86_64}
+mkdir build32
+cd build32
+%configure32 \
+	--prefix=%{_prefix} \
+	--libdir=%{_prefix}/lib \
+	--sysconfdir=%{_sysconfdir} \
+	--enable-shared \
+	--enable-symbolic-functions \
+	--enable-aload \
+	--enable-rawmidi \
+	--enable-seq \
+	--enable-mixer \
+	--enable-mixer-modules
+%make_build
+cd ..
+%endif
+
+mkdir build
+cd build
 %configure \
 	--enable-shared \
 	--enable-symbolic-functions \
@@ -166,13 +247,16 @@ fi
 perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
 %make_build
 
-# ensure we enable html doc
-sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
-
-
 %make -C doc doc
 
 %install
+%ifarch %{x86_64}
+cd build32
+%make_install
+cd ..
+%endif
+
+cd build
 %make_install
 
 # (proyvind): configuration for wandboard
@@ -216,9 +300,22 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libasound.so.%{major}*
+%{_prefix}/lib/alsa-lib
 
 %files -n %{libtopology}
 %{_libdir}/libatopology.so.%{major}*
+
+%if "%{libname}" != "%{lib32name}"
+%files -n %{lib32name}
+%{_prefix}/lib/libasound.so.%{major}*
+
+%files -n %{lib32topology}
+%{_prefix}/lib/libatopology.so.%{major}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/*.so
+%{_prefix}/lib/pkgconfig/*.pc
+%endif
 
 %files -n %{devname}
 %dir %{_includedir}/alsa/
@@ -232,4 +329,4 @@ fi
 %{_libdir}/pkgconfig/alsa.pc
 
 %files docs
-%doc COPYING doc/doxygen/html/* doc/asoundrc.txt
+%doc COPYING build/doc/doxygen/html/* doc/asoundrc.txt

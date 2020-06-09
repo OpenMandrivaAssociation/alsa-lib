@@ -300,7 +300,7 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libasound.so.%{major}*
-%ifnarch %aarch64
+%ifnarch %aarch64 %riscv64
 %{_prefix}/lib/alsa-lib
 %endif
 

@@ -300,7 +300,9 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libasound.so.%{major}*
+%ifnarch %aarch64
 %{_prefix}/lib/alsa-lib
+%endif
 
 %files -n %{libtopology}
 %{_libdir}/libatopology.so.%{major}*

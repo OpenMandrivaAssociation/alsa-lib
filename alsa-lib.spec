@@ -13,7 +13,7 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.2.3
-Release:	1
+Release:	2
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
@@ -300,9 +300,7 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libasound.so.%{major}*
-%ifnarch %aarch64 %riscv64
-%{_prefix}/lib/alsa-lib
-%endif
+%{_libdir}/alsa-lib
 
 %files -n %{libtopology}
 %{_libdir}/libatopology.so.%{major}*
@@ -310,6 +308,7 @@ fi
 %ifarch %{x86_64}
 %files -n %{lib32name}
 %{_prefix}/lib/libasound.so.%{major}*
+%{_prefix}/lib/alsa-lib
 
 %files -n %{lib32topology}
 %{_prefix}/lib/libatopology.so.%{major}*

@@ -12,7 +12,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.2.3.1
+Version:	1.2.3.2
 Release:	1
 Epoch:		2
 Group:		Sound

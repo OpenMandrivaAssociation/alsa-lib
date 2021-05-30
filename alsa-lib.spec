@@ -294,6 +294,7 @@ fi
 %{_datadir}/alsa/pcm/*
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/smixer.conf
+%{_datadir}/alsa/ctl/default.conf
 %dir %{_libdir}/alsa-lib/
 %dir %{_libdir}/alsa-lib/smixer/
 %{_libdir}/alsa-lib/smixer/*

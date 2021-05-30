@@ -12,7 +12,7 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.2.4
+Version:	1.2.5
 Release:	1
 Epoch:		2
 Group:		Sound
@@ -294,6 +294,7 @@ fi
 %{_datadir}/alsa/pcm/*
 %{_datadir}/alsa/alsa.conf
 %{_datadir}/alsa/smixer.conf
+%{_datadir}/alsa/ctl/default.conf
 %dir %{_libdir}/alsa-lib/
 %dir %{_libdir}/alsa-lib/smixer/
 %{_libdir}/alsa-lib/smixer/*

@@ -13,13 +13,12 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.2.5.1
-Release:	1
+Release:	2
 Epoch:		2
 Group:		Sound
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
 Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
-Source1:	README.soundprofiles
 Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
@@ -259,34 +258,13 @@ cd ..
 cd build
 %make_install
 
+%ifarch %{arm}
 # (proyvind): configuration for wandboard
 install -m644 %{SOURCE10} %{SOURCE11} %{SOURCE12} %{buildroot}%{_datadir}/alsa/cards
-
-# (cg) For sound profile support
-mkdir -p %{buildroot}%{_sysconfdir}/sound/profiles/alsa
-echo "SOUNDPROFILE=alsa" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/profile.conf
-echo "# This file is left blank to allow alsa to default to dmix" > %{buildroot}%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
-install -m 644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/sound/profiles/README
-
-%define alt_name soundprofile
-%define alt_priority 10
-
-%post
-%{_sbindir}/update-alternatives \
-  --install %{_sysconfdir}/sound/profiles/current %{alt_name} %{_sysconfdir}/sound/profiles/alsa %{alt_priority}
-
-%postun
-if [ ! -f %{_sysconfdir}/sound/profiles/alsa/profile.conf ]; then
-  /usr/sbin/update-alternatives --remove %{alt_name} %{_sysconfdir}/sound/profiles/alsa
-fi
+%endif
 
 %files
 %{_bindir}/aserver
-%dir %{_sysconfdir}/sound/profiles
-%dir %{_sysconfdir}/sound/profiles/alsa
-%{_sysconfdir}/sound/profiles/README
-%{_sysconfdir}/sound/profiles/alsa/profile.conf
-%{_sysconfdir}/sound/profiles/alsa/alsa-default.conf
 %dir %{_datadir}/alsa/
 %dir %{_datadir}/alsa/cards/
 %dir %{_datadir}/alsa/ctl

@@ -13,7 +13,7 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.2.7
-Release:	1
+Release:	2
 Group:		Sound
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/
@@ -21,6 +21,7 @@ Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
+Patch0:		alsa-lib-1.2.7-hdmi-audio.patch
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
 Requires(post):	chkconfig

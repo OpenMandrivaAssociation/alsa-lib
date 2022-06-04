@@ -1,0 +1,29 @@
+diff -up alsa-lib-1.2.7/src/control/control_hw.c.omv~ alsa-lib-1.2.7/src/control/control_hw.c
+--- alsa-lib-1.2.7/src/control/control_hw.c.omv~	2022-06-04 17:56:58.549703614 +0200
++++ alsa-lib-1.2.7/src/control/control_hw.c	2022-06-04 17:59:11.172644360 +0200
+@@ -288,8 +288,10 @@ static int snd_ctl_hw_pcm_info(snd_ctl_t
+ 	if (ioctl(hw->fd, SNDRV_CTL_IOCTL_PCM_INFO, info) < 0)
+ 		return -errno;
+ 	/* may be configurable (optional) */
+-	if (__snd_pcm_info_eld_fixup_check(info))
+-		return __snd_pcm_info_eld_fixup(info);
++	if (__snd_pcm_info_eld_fixup_check(info)) {
++		if (__snd_pcm_info_eld_fixup(info))
++			SYSMSG("ELD lookup failed, using old HDMI output names\n");
++	}
+ 	return 0;
+ }
+ 
+diff -up alsa-lib-1.2.7/src/pcm/pcm_hw.c.omv~ alsa-lib-1.2.7/src/pcm/pcm_hw.c
+--- alsa-lib-1.2.7/src/pcm/pcm_hw.c.omv~	2022-06-04 18:00:04.294767782 +0200
++++ alsa-lib-1.2.7/src/pcm/pcm_hw.c	2022-06-04 18:00:18.467800074 +0200
+@@ -325,7 +325,8 @@ static int snd_pcm_hw_info(snd_pcm_t *pc
+ 	}
+ 	/* may be configurable (optional) */
+ 	if (__snd_pcm_info_eld_fixup_check(info))
+-		return __snd_pcm_info_eld_fixup(info);
++		if (__snd_pcm_info_eld_fixup(info))
++			SYSMSG("ELD lookup failed, using old HDMI output names\n");
+ 	return 0;
+ }
+ 

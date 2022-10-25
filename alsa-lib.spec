@@ -100,7 +100,9 @@ Summary:	Advanced Linux Sound Architecture (ALSA) library (32-bit)
 Group:		Sound
 Requires:	%{name} = %{EVRD}
 Suggests:	libalsa-plugins
+%ifnarch aarch64
 BuildRequires:	libc6
+%endif
 
 %description -n	%{lib32name}
 Advanced Linux Sound Architecture (ALSA) is a modularized architecture which

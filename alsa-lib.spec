@@ -12,8 +12,8 @@
 
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
-Version:	1.2.8
-Release:	3
+Version:	1.2.9
+Release:	1
 Group:		Sound
 License:	LGPLv2+
 Url:		http://www.alsa-project.org/

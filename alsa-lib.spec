@@ -1,5 +1,7 @@
 # 32-bit devel files are needed for wine
 
+%define _disable_lto 1
+
 %define major 2
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2

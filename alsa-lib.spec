@@ -1,7 +1,5 @@
 # 32-bit devel files are needed for wine
 
-%define _disable_lto 1
-
 %define major 2
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2
@@ -26,7 +24,6 @@ Source12:	imx-spdif.conf
 Patch0:		alsa-lib-1.2.7-hdmi-audio.patch
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
-BuildRequires:	pkgconfig(sndfile)
 Requires(post):	chkconfig
 Requires(postun):	chkconfig
 Provides:	libalsa-data = 2:%{version}-%{release}
@@ -185,6 +182,8 @@ find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
 
 %build
+export CC=gcc
+export CXX=g++	
 export PYTHON=%{__python}
 export CONFIGURE_TOP="`pwd`"
 

@@ -26,6 +26,7 @@ Source12:	imx-spdif.conf
 Patch0:		alsa-lib-1.2.7-hdmi-audio.patch
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(sndfile)
 Requires(post):	chkconfig
 Requires(postun):	chkconfig
 Provides:	libalsa-data = 2:%{version}-%{release}

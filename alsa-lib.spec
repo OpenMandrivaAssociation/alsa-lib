@@ -182,6 +182,11 @@ find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
 sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in doc/doxygen.cfg
 
 %build
+# AS of Clang 16, GCC is needed or 
+# warning: version script assignment of 'ALSA_1.1.6' to symbol 'snd_dlopen' failed: symbol not defined
+# ld.lld: error: undefined symbol: snd_dlopen
+# referenced by dlmisc.c:134 (/builddir/build/BUILD/alsa-lib-1.2.9/src/dlmisc.c:134)
+# .libs/dlmisc.o:(__snd_dlopen)
 export CC=gcc
 export CXX=g++	
 export PYTHON=%{__python}

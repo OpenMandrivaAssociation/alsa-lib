@@ -232,6 +232,9 @@ cd build32
 	--enable-seq \
 	--enable-mixer \
 	--enable-mixer-modules
+# The topology Versions file is generated in-tree even for
+# an out-of-tree build
+cp ../src/topology/Versions src/topology/
 %make_build
 cd ..
 %endif
@@ -250,11 +253,13 @@ cd build
 	--enable-mixer-pymods \
 	--with-pythonlibs="`python-config --libs`" \
 	--with-pythonincludes="`python-config --includes`"
-
+# The topology Versions file is generated in-tree even for
+# an out-of-tree build
+cp ../src/topology/Versions src/topology/
 # Force definition of -DPIC so that VERSIONED_SYMBOLS are used
 # FIXME: alsa people should not depend on PIC to determine a DSO build...
 perl -pi -e 's,(^pic_flag=.+)(-fPIC),\1-DPIC \2,' libtool
-%make_build
+%make_build PYTHON_LIBS=-lpython%{pyver}
 
 %make -C doc doc
 

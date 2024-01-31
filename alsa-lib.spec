@@ -23,6 +23,7 @@ Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
 Patch0:		alsa-lib-1.2.7-hdmi-audio.patch
 BuildRequires:	doxygen
+BuildRequires:	which
 BuildRequires:	pkgconfig(python)
 Requires(post):	chkconfig
 Requires(postun):	chkconfig

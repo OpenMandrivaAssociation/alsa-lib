@@ -188,8 +188,8 @@ sed -i 's/GENERATE_RTF/GENERATE_HTML = YES\nGENERATE_RTF/' doc/doxygen.cfg.in do
 # ld.lld: error: undefined symbol: snd_dlopen
 # referenced by dlmisc.c:134 (/builddir/build/BUILD/alsa-lib-1.2.9/src/dlmisc.c:134)
 # .libs/dlmisc.o:(__snd_dlopen)
-export CC=gcc
-export CXX=g++	
+#export CC=gcc
+#export CXX=g++	
 export PYTHON=%{__python}
 export CONFIGURE_TOP="`pwd`"
 

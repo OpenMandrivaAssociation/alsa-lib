@@ -22,6 +22,7 @@ Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
 Patch0:		alsa-lib-1.2.7-hdmi-audio.patch
+BuildRequires:	libtool-base
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
 Requires(post):	chkconfig

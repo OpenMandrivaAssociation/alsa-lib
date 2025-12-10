@@ -1,5 +1,7 @@
 # 32-bit devel files are needed for wine
 
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
+
 %define major 2
 %define oldlib %mklibname alsa %{major}
 %define olddev %mklibname -d alsa2

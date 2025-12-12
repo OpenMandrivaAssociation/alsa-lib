@@ -9,7 +9,7 @@ diff -up alsa-lib-1.2.7/src/control/control_hw.c.omv~ alsa-lib-1.2.7/src/control
 -		return __snd_pcm_info_eld_fixup(info);
 +	if (__snd_pcm_info_eld_fixup_check(info)) {
 +		if (__snd_pcm_info_eld_fixup(info))
-+			SYSMSG("ELD lookup failed, using old HDMI output names\n");
++			snd_checknum(CONTROL, "ELD lookup failed, using old HDMI output names\n");
 +	}
  	return 0;
  }
@@ -23,7 +23,7 @@ diff -up alsa-lib-1.2.7/src/pcm/pcm_hw.c.omv~ alsa-lib-1.2.7/src/pcm/pcm_hw.c
  	if (__snd_pcm_info_eld_fixup_check(info))
 -		return __snd_pcm_info_eld_fixup(info);
 +		if (__snd_pcm_info_eld_fixup(info))
-+			SYSMSG("ELD lookup failed, using old HDMI output names\n");
++			snd_checknum(PCM, "ELD lookup failed, using old HDMI output names\n");
  	return 0;
  }
  

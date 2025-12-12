@@ -29,6 +29,7 @@ BuildRequires:	autoconf
 BuildRequires:	make
 BuildRequires:	m4
 BuildRequires:	slibtool
+BuildRequires:	libtool-base
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
 Requires(post):	chkconfig

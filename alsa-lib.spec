@@ -27,7 +27,6 @@ BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	make
 BuildRequires:	m4
-BuildRequires:	slibtool
 BuildRequires:	libtool-base
 BuildRequires:	doxygen
 BuildRequires:	pkgconfig(python)
@@ -193,7 +192,9 @@ export CONFIGURE_TOP="`pwd`"
 
 #repect cflags
 find . -name Makefile.am -exec sed -i -e '/CFLAGS/s:-g -O2::' {} +
-slibtoolize --copy --force
+# 1.2.16.1 calls the libtool-private _LT_SET_OPTION, and the versioned
+# symbol check reads VERSION= from GNU ltmain.sh. slibtool provides neither.
+export LIBTOOLIZE=libtoolize
 autoreconf -fiv
 
 if [ -e src/conf/smixer.conf ]; then

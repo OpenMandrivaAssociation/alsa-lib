@@ -15,7 +15,7 @@
 Summary:	Config files for Advanced Linux Sound Architecture (ALSA)
 Name:		alsa-lib
 Version:	1.2.16.1
-Release:	1
+Release:	2
 Group:		Sound
 License:	LGPLv2+
 Url:		https://www.alsa-project.org/
@@ -23,6 +23,12 @@ Source0:	ftp://ftp.alsa-project.org/pub/lib/%{name}-%{version}.tar.bz2
 Source10:	imx6-wandboard-.conf
 Source11:	imx-hdmi-soc.conf
 Source12:	imx-spdif.conf
+Source20:	alsa-lib.rpmlintrc
+# The 32-bit build uses gcc. clang cannot link -m32 programs.
+%ifarch %{x86_64}
+BuildRequires:	gcc
+BuildRequires:	gcc-c++
+%endif
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	make
@@ -221,6 +227,9 @@ fi
 %ifarch %{x86_64}
 mkdir build32
 cd build32
+# set_build_flags keeps a CC that is already set. clang -m32 cannot link.
+export CC=gcc
+export CXX=g++
 %configure32 \
 	--prefix=%{_prefix} \
 	--libdir=%{_prefix}/lib \
@@ -237,6 +246,8 @@ cd build32
 cp ../src/topology/Versions src/topology/
 %make_build
 cd ..
+unset CC
+unset CXX
 %endif
 
 mkdir build
